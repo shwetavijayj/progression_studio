@@ -26,6 +26,7 @@ function saveLoginInformation(loggedInUserDetails, callback) {
 }
 
 function authenticateUser(userDetails, callback) {
+  console.log('user', userDetails);
   userCredentials = {
     userName: userDetails.userName,
     password: userDetails.password
@@ -61,6 +62,8 @@ function authenticateUser(userDetails, callback) {
             );
           }
         });
+      } else {
+        callback({ statusCode: 401, msg: 'unauthorize user' });
       }
     }
   });

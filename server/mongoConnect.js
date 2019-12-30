@@ -3,7 +3,8 @@ var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 mongoose.connect('mongodb://localhost/Progress-studio', {
-  useNewUrlParser: true
+  useNewUrlParser: true,
+  useUnifiedTopology: true
 });
 
 var dbConnect = mongoose.connection;
@@ -58,12 +59,14 @@ var videoTypeSchema = mongoose.Schema({
 });
 
 var videoDetails = mongoose.Schema({
+  videoId: String,
   title: String,
   length: Number,
-  artist: String,
   genreId: String,
   partialPath: String,
-  ratings: Number
+  ratings: Number,
+  typeId: String,
+  artists: Array
 });
 
 module.exports = {

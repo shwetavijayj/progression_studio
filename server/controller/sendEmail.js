@@ -1,45 +1,28 @@
-const nodemailer = require('nodemailer');
+const sgMail = require('@sendgrid/mail');
 
-async function sendTheMail(sendEmailData, callback) {
-  let transporter = nodemailer.createTransport({
-    auth: {
-      user: 'your email id',
-      pass: 'your password'
-    }
-  });
-
-  await transporter.sendMail(
-    {
-      from: `xyz@gmail.com`,
-      to: `${sendEmailData.email}`,
-      subject: `${sendEmailData.subject}`,
-      text: `${sendEmailData.content}`,
-      html: `${sendEmailData.html}`
-    },
-    (Err, Response) => {
-      if (Err) {
-        callback({ 'Error in sending mail': Err });
-      } else {
-        callback(null, { msg: 'mail send success' });
-      }
-    }
-  );
-}
-
-// let x = {
-//   email: 'shweta.joshi@harbingergroup.com',
-//   subject: 'hello',
-//   text: 'hii',
-//   html: '<b>hiiii</b>'
-// };
-// testMail(x, (err, res) => {
-//   if (err) {
-//     console.log('errr', err);
-//   } else {
-//     console.log('res', res);
-//   }
-// });
-
-module.exoprts = {
-  sendTheMail
+const myKey =
+  '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';
+sgMail.setApiKey(myKey);
+var myInfo = {
+  to: 'joshi.shweta222@gmail.com',
+  from: 'shweta.joshi@harbingergroup.com',
+  subject: 'test 234',
+  text: 'hello this is test mail',
+  html: '<b>how are you?</b>'
 };
+// const sendTheMail = info => {
+const msg = {
+  to: myInfo.to,
+  from: myInfo.from,
+  subject: myInfo.subject,
+  text: myInfo.text,
+  html: myInfo.html
+};
+sgMail.send(msg);
+// };
+
+// sendTheMail(myInfo);
+
+// module.exoprts = {
+//   sendTheMail
+// };
