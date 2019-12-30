@@ -1,4 +1,5 @@
 import axios from 'axios';
+import merge from 'lodash/merge';
 import { retrieveToken } from './localStorage';
 
 export const apiActionTypes = x => ({

@@ -9,11 +9,13 @@ import {
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
+import Login from './containers/Login';
 class App extends Component {
   render() {
     let routes = (
-      <Switch>{/* <Route exact path='/' component={Login} /> */}</Switch>
+      <Switch>
+        <Route exact path='/' component={Login} />
+      </Switch>
     );
     return (
       <>
