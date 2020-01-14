@@ -1,0 +1,38 @@
+{
+  "openapi": "3.0.0",
+  "servers": [
+    {
+      "url": "http://127.0.0.1:41001/#!/"
+      //   /api-2.0/organizations/{PORTAL_ID/analytics/
+    }
+  ],
+  "info": {
+    "version": "1.0.0",
+    "title": "swagger testing",
+    "description": "A sample to test how it works"
+  },
+  "paths": {
+    "/getData": {
+      "get": {
+        "description": "it will give sample data to test the app and swagger",
+        "operationId": "getUsers",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "get users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error"
+          }
+        }
+      }
+    }
+  }
+}

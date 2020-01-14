@@ -2,15 +2,20 @@ var mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb://localhost/Progress-studio', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
+mongoose
+  .connect('mongodb://localhost/Progress-studio', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(() => console.log('DB server connect'))
+  .catch(e => console.log('db error', e));
 
 var dbConnect = mongoose.connection;
 if (!dbConnect) {
   console.log('Sorry Connection is not established');
   return;
+} else {
+  console.log('connection success');
 }
 
 /// Schema creation
@@ -69,6 +74,11 @@ var videoDetails = mongoose.Schema({
   artists: Array
 });
 
+var testData = mongoose.Schema({
+  id: String,
+  name: String
+});
+
 module.exports = {
   mongoose,
   userSchema,
@@ -78,5 +88,6 @@ module.exports = {
   generSchema,
   artistSchema,
   videoTypeSchema,
-  videoDetails
+  videoDetails,
+  testData
 };

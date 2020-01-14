@@ -2,21 +2,30 @@ var express = require('express');
 var router = express.Router();
 const login = require('../controller/users/login');
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+// router.get('/', function(req, res, next) {
+//   res.send('respond with a resource');
+// });
+
+router.post('/login', function(req, res) {
+  console.log(req.body);
+  login.authenticateUser(req.body, (error, response) => {
+    if (error) {
+      res.send({ 'Error is ': error });
+    } else {
+      console.log('response', response);
+      res.send({ msg: response });
+    }
+  });
 });
 
-router.post('/login', function(req, res, next) {
-  console.log(req.body);
-  // login.authenticateUser(req.body, (error, response) => {
-  //   if (error) {
-  //     res.send(error);
-  //   } else {
-  //     console.log('response', response);
-  //     res.send(response);
-  //   }
-  // });
-  res.send({ msg: 'hello' });
+router.get('/testData', function(req, res) {
+  login.fetchTestData((error, response) => {
+    if (error) {
+      res.send({ 'Error is ': error });
+    } else {
+      res.send(response);
+    }
+  });
 });
 
 module.exports = router;

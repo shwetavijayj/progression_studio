@@ -8,7 +8,7 @@ const loginModel = mongo.mongoose.model(
   mongo.loginStatusSchema,
   'loginStatus'
 );
-
+const testModel = mongo.mongoose.model('testData', mongo.testData, 'testData');
 function saveLoginInformation(loggedInUserDetails, callback) {
   userDetails = {
     LoginStatusId: uniqid.process(),
@@ -26,7 +26,6 @@ function saveLoginInformation(loggedInUserDetails, callback) {
 }
 
 function authenticateUser(userDetails, callback) {
-  console.log('user', userDetails);
   userCredentials = {
     userName: userDetails.userName,
     password: userDetails.password
@@ -68,7 +67,20 @@ function authenticateUser(userDetails, callback) {
     }
   });
 }
+
+function fetchTestData(callback) {
+  let condition = {};
+  testModel.find(condition, (error, response) => {
+    if (error) {
+      callback(error);
+    } else {
+      callback(null, response);
+    }
+  });
+}
+
 module.exports = {
   authenticateUser,
-  saveLoginInformation
+  saveLoginInformation,
+  fetchTestData
 };
